@@ -1,28 +1,21 @@
 package ConnectFourNeuralNets;
 
-import java.util.Arrays;
-import java.util.List;
+import java.io.IOException;
 
 public class Main {
    public static void main(String[] args) {
-     data.getWins();
-  //   List<int[][]> history = game.playGame();
-  //   for (int[][] i : history) {
-  //         print2D(i);
-  //         System.out.println();
-	// }
-
+    //  data.getWins();
+    // data.getOneGame();
+    try {
+      data.writeData(100000);
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   
   }
 
   
-  public static void print2D(int mat[][]){
-      // Loop through all rows
-      for (int[] row : mat)
-
-          // converting each row as string
-          // and then printing in a separate line
-          System.out.println(Arrays.toString(row));
-  }
+  
 
 }

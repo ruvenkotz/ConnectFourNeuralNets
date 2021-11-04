@@ -32,7 +32,7 @@ public class Game {
          history.add(result);
          gameFinished = true;
       }
-       if(movesPlayed == 41){
+      else if(movesPlayed == 41){
         int[][] result = new int[1][1]; 
         result[0][0] = 0;
         history.add(result);
