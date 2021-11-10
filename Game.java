@@ -4,7 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Game {
-
+/**
+ * Plays a game and returns the history
+ * @return
+ */
   public static List<int[][]> playGame(){
     Board b = new Board();
     int player = 1;
@@ -12,15 +15,13 @@ public class Game {
     boolean gameFinished = false;
     int movesPlayed = 0;
     while(!gameFinished){
-      List<Integer> avaibleMoves = b.getMoves();
-      int randomChoice = (int) (Math.random() * avaibleMoves.size());
-      int move = avaibleMoves.get(randomChoice);
+      int move = Engines.winOrBlock(b.getMoves(), b, player); 
       int row = b.placeATile(move, player);
 
       //Copy and add the new board
       int[][] board = b.getBoard();
       // Main.print2D(board);
-      int [][] copy = new int[board.length][];
+      int [][] copy = new int[6][7];
       for(int i = 0; i < board.length; i++)
           copy[i] = board[i].clone();
       history.add(copy);
@@ -28,6 +29,8 @@ public class Game {
       //Check for end of game
       if(checkForWin(player, row, move, board)){
          int[][] result = new int[1][1]; 
+         if(player == 2) 
+          player = -1;
          result[0][0] = player;
          history.add(result);
          gameFinished = true;
@@ -39,7 +42,10 @@ public class Game {
         gameFinished = true;
       }
       movesPlayed++;
-      player = -player;
+      if(player == 1)
+        player = 2;
+      else
+        player = 1;
     }
     // b.resetBoard();
     return history;
@@ -62,8 +68,9 @@ public class Game {
     while (r != 0 && board[r - 1][c] == player){ 
         r = r - 1;
         depth = depth + 1;
-        if (depth == 4)
+        if (depth == 4){
             return true;
+        }
     }
     depth = 1;
     r = row;
@@ -73,8 +80,9 @@ public class Game {
     while (r != 5 && board[r + 1][c] == player){
         r = r + 1;
         depth = depth + 1;
-        if (depth == 4)
+        if (depth == 4){
             return true;
+        }
     }
     depth = 1;
     r = row;
@@ -84,8 +92,9 @@ public class Game {
     while (c != 0 && board[r][c - 1] == player || (depth == 3 && c <=3 && board[r][c+3] == player)){
         c = c - 1;
         depth = depth + 1;
-        if (depth == 4)
+        if (depth == 4){
             return true;
+        }
     }
     depth = 1;
     r = row;
@@ -95,8 +104,9 @@ public class Game {
   while (c != 6 && board[r][c + 1] == player || (depth == 3 && c >=3 && board[r][c-3] == player)){
         c = c + 1;
         depth = depth + 1;
-        if (depth == 4)
+        if (depth == 4){
             return true;
+        }
     }
     depth = 1;
     r = row;
@@ -107,8 +117,9 @@ public class Game {
         r = r - 1;
         c = c - 1;
         depth = depth + 1;
-        if (depth == 4)
+        if (depth == 4){
             return true;
+        }
     }
     depth = 1;
     r = row;
@@ -119,8 +130,9 @@ public class Game {
         r = r + 1;
         c = c - 1;
         depth = depth + 1;
-        if (depth == 4)
+        if (depth == 4){
             return true;
+        }
     }
     depth = 1;
     r = row;
@@ -131,8 +143,9 @@ public class Game {
         r = r - 1;
         c = c + 1;
         depth = depth + 1;
-        if (depth == 4)
+        if (depth == 4){
             return true;
+        }
     }
     depth = 1;
     r = row;
@@ -143,8 +156,9 @@ public class Game {
         r = r + 1;
         c = c + 1;
         depth = depth + 1;
-        if (depth == 4)
+        if (depth == 4){
             return true;
+        }
     }
 
 

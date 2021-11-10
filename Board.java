@@ -53,12 +53,10 @@ public class Board {
       int row = nextMove[move];
       if (b[row][move] == 0) {
         b[row][move] = player;
-        if (row > 0) {
-          nextMove[move] = row-1;
-        }
-        else{
+        if (row == 0){
           availbleMoves.remove((Integer) move);
         }
+        nextMove[move] = row-1;
       }
       return nextMove[move] +1;
     

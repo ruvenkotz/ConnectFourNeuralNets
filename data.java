@@ -17,7 +17,7 @@ public class data {
    */
   public static void writeData(int games) throws IOException{ 
     List<int[]> data = cleanData(games);
-    FileWriter csvWriter = new FileWriter(new File("data.txt"));
+    FileWriter csvWriter = new FileWriter(new File("WinOrBlock.txt"));
     for(int i = 1; i <= 42; i++) {
       csvWriter.append("x" + i + ",");
     }
@@ -36,7 +36,12 @@ public class data {
     csvWriter.close();
   }
 
-
+/**
+ * Plays games and coverts the gamestates into 1 x 43 
+ * to be used by a neural net
+ * @param games number of games
+ * @return formatted data
+ */
   private static List<int[]> cleanData(int games){
     List<int[]> data = new ArrayList<>();
 
@@ -67,7 +72,11 @@ public class data {
   }
 
 
-
+/**
+ * getWins can be used if you want to pit two of the same engines against 
+ * each other
+ * @param games number of games
+ */
   public static void getWins(int games){
     int player1Wins = 0;
     int player2Wins = 0;
@@ -88,6 +97,9 @@ public class data {
 
 
   }
+  /**
+   * Used for testing to play one game and then print the history 
+   */
   public static void getOneGame(){
        List<int[][]> history = Game.playGame();
     for (int[][] i : history) {
@@ -96,7 +108,10 @@ public class data {
 	}
 
   }
-  
+  /**
+   * Helper that pretty prints a 2D array
+   * @param mat
+   */
   public static void print2D(int mat[][]){
     // Loop through all rows
     for (int[] row : mat)
