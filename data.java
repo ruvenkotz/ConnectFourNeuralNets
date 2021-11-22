@@ -21,14 +21,16 @@ public class data {
     for(int i = 1; i <= 42; i++) {
       csvWriter.append("x" + i + ",");
     }
-    csvWriter.append("r");
+    csvWriter.append("w,");
+    csvWriter.append("l,");
+    csvWriter.append("d,");
     csvWriter.append("\n");
     for(int[] rowData : data) {   
       StringBuilder s = new StringBuilder();
       for(int i =0; i < rowData.length-1;i++) {
         s.append(rowData[i] + ",");
       }
-      s.append(rowData[42]);
+      s.append(rowData[44]);
       csvWriter.append(s);
       csvWriter.append("\n");
     }
@@ -47,13 +49,13 @@ public class data {
 
     for(int i = 0; i < games; i++) {
         List<int[][]> history= Game.playGame();
-        int result = history.get(history.size()-1)[0][0];
+        int[][] result = history.get(history.size()-1);
 
         //Look at an entire game
         for(int j = 0; j < history.size()-1; j++) {
         	int[][] gameState = history.get(j);
      
-          int[] newInput = new int[43];
+          int[] newInput = new int[45];
           int index = 0;
         	for(int a = 0; a < 6; a++) {
         		for(int b = 0; b < 7; b++) {
@@ -61,7 +63,8 @@ public class data {
         			index++;
         		}
         	}
-        	newInput[42] = result;
+          for(int a = 0; a < 3; a++)
+        	  newInput[a+42] = result[0][a];
         	data.add(newInput);
         	
       }

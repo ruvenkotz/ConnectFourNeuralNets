@@ -15,7 +15,11 @@ public class Game {
     boolean gameFinished = false;
     int movesPlayed = 0;
     while(!gameFinished){
-      int move = Engines.winOrBlock(b.getMoves(), b, player); 
+      int move = 0;
+      if(player == 1)
+        move = Engines.centerPlay(b.getMoves(), b, player); 
+      else
+        move = Engines.centerPlay(b.getMoves(), b, player); 
       int row = b.placeATile(move, player);
 
       //Copy and add the new board
@@ -28,16 +32,14 @@ public class Game {
 
       //Check for end of game
       if(checkForWin(player, row, move, board)){
-         int[][] result = new int[1][1]; 
-         if(player == 2) 
-          player = -1;
-         result[0][0] = player;
+         int[][] result = new int[1][3]; 
+         result[0][player-1] = 1;
          history.add(result);
          gameFinished = true;
       }
       else if(movesPlayed == 41){
-        int[][] result = new int[1][1]; 
-        result[0][0] = 0;
+        int[][] result = new int[1][3]; 
+        result[0][2] = 1;
         history.add(result);
         gameFinished = true;
       }
