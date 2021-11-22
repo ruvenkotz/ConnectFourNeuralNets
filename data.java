@@ -86,12 +86,12 @@ public class data {
     int draws = 0;
     for(int i = 0; i < games; i++){
       List<int[][]> history = Game.playGame();
-      int result = history.get(history.size()-1)[0][0];
-      if(result == 1)
+      int[][] result = history.get(history.size()-1);
+      if(result[0][0] == 1)
         player1Wins++;
-      else if(result == -1)
+      else if(result[0][1] == 1)
         player2Wins++;
-      else if(result == 0)
+      else if(result[0][2] == 1)
         draws++;
     }
    System.out.println("Player One Wins: " + player1Wins);
