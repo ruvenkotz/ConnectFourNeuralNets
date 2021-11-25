@@ -91,6 +91,11 @@ public class Board {
        b[i][j] = 0;
     }
   }
+  public static int getOpp(int player){
+    if (player == 1) return 2;
+    else return 1;
+  }
+
 
 
 }

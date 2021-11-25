@@ -17,19 +17,17 @@ public class Game {
     while(!gameFinished){
       int move = 0;
       if(player == 1)
-        move = Engines.centerPlay(b.getMoves(), b, player); 
+        move = Engines.threeInARows(b.getMoves(), b, player); 
       else
-        move = Engines.centerPlay(b.getMoves(), b, player); 
+        move = Engines.threeInARows(b.getMoves(), b, player); 
       int row = b.placeATile(move, player);
-
       //Copy and add the new board
       int[][] board = b.getBoard();
-      // Main.print2D(board);
+    //   data.print2D(board);
       int [][] copy = new int[6][7];
       for(int i = 0; i < board.length; i++)
           copy[i] = board[i].clone();
       history.add(copy);
-
       //Check for end of game
       if(checkForWin(player, row, move, board)){
          int[][] result = new int[1][3]; 
@@ -44,10 +42,7 @@ public class Game {
         gameFinished = true;
       }
       movesPlayed++;
-      if(player == 1)
-        player = 2;
-      else
-        player = 1;
+      player = Board.getOpp(player);
     }
     // b.resetBoard();
     return history;

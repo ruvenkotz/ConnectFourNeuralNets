@@ -1,7 +1,6 @@
 package ConnectFourNeuralNets;
 
 import java.util.List;
-import java.util.Random;
 
 /**
  * This class contains all the engines takes in a board and a list of 
@@ -54,7 +53,17 @@ public class Engines {
       }
     }
     return -1;
+
+  
   }
+  /**
+   * centerPlay uses WinOrBlock but if that's not avaible, plays in the 
+   * center of the board. The center square is (4,3).
+   * @param avaibleMoves
+   * @param b
+   * @param player
+   * @return
+   */
   public static int centerPlay(List<Integer> avaibleMoves, Board b, int player){
     int res = winOrBlockHelper(avaibleMoves, b, player);
     //If those moves don't exist, return a random move
@@ -76,6 +85,44 @@ public class Engines {
       return res;
   }
   
+  public static int threeInARows(List<Integer> avaibleMoves, Board b, int player){
+    int res = winOrBlockHelper(avaibleMoves, b, player);
+    if(res != -1) return res;
+    int[][] board = b.getBoard();
+    int bestMove = -1;
+    int bestMoveValue = 0;
+
+    for(int i = 0; i < avaibleMoves.size(); i++){
+      int col = avaibleMoves.get(i);
+      int row = b.getRow(col);
+      int [][] copy = new int[6][7];
+      for(int j = 0; j < board.length; j++)
+          copy[j] = board[j].clone();
+      copy[row][col] = player;
+      int value = threeInARowsHelper(copy, player);
+      if(value > bestMoveValue || (value > 0 && value == bestMoveValue && Math.random() > .5)){
+        bestMove = col;
+        bestMoveValue = value;
+      }
+    }
+    if(bestMove == -1)
+      return centerPlay(avaibleMoves, b, player);
+    else
+      return bestMove;    
+  }
+
+  public static int threeInARowsHelper(int[][] board, int player){
+    int playerScore = 0;
+    for(int i = 0; i < 6; i++){
+      for(int j = 0; j < 7; j++){
+        if(board[i][j] == 0){
+          if(Game.checkForWin(player, i, j, board) == true)
+            playerScore++;
+        }
+      }
+    }
+    return playerScore;
+  }
 
 
 

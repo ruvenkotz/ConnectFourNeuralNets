@@ -17,7 +17,7 @@ public class data {
    */
   public static void writeData(int games) throws IOException{ 
     List<int[]> data = cleanData(games);
-    FileWriter csvWriter = new FileWriter(new File("WinOrBlock.txt"));
+    FileWriter csvWriter = new FileWriter(new File("Test.txt"));
     for(int i = 1; i <= 42; i++) {
       csvWriter.append("x" + i + ",");
     }
@@ -74,7 +74,6 @@ public class data {
 
   }
 
-
 /**
  * getWins can be used if you want to pit two of the same engines against 
  * each other
@@ -104,7 +103,7 @@ public class data {
    * Used for testing to play one game and then print the history 
    */
   public static void getOneGame(){
-       List<int[][]> history = Game.playGame();
+    List<int[][]> history = Game.playGame();
     for (int[][] i : history) {
           print2D(i);
           System.out.println();
