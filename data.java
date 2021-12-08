@@ -16,8 +16,8 @@ public class data {
    * @throws IOException
    */
   public static void writeData(int games) throws IOException{ 
-    List<int[]> data = cleanData(games);
-    FileWriter csvWriter = new FileWriter(new File("Test.txt"));
+    List<int[]> data = cleanDataEndgames(games);
+    FileWriter csvWriter = new FileWriter(new File("Endgames.txt"));
     for(int i = 1; i <= 42; i++) {
       csvWriter.append("x" + i + ",");
     }
@@ -54,7 +54,6 @@ public class data {
         //Look at an entire game
         for(int j = 0; j < history.size()-1; j++) {
         	int[][] gameState = history.get(j);
-     
           int[] newInput = new int[45];
           int index = 0;
         	for(int a = 0; a < 6; a++) {
@@ -73,6 +72,40 @@ public class data {
     return data;
 
   }
+  
+  /**
+ * Plays games and coverts the gamestates into 1 x 43 
+ * to be used by a neural net
+ * @param games number of games
+ * @return formatted data
+ */
+private static List<int[]> cleanDataEndgames(int games){
+  List<int[]> data = new ArrayList<>();
+
+  for(int i = 0; i < games; i++) {
+      List<int[][]> history= Game.playGame();
+      int[][] result = history.get(history.size()-1);
+
+      //Add only the second to last game
+      int[][] gameState = history.get(history.size()-3);
+      int[] newInput = new int[45];
+      int index = 0;
+      for(int a = 0; a < 6; a++) {
+        for(int b = 0; b < 7; b++) {
+          newInput[index] = gameState[a][b];
+          index++;
+        }
+      }
+      for(int x = 0; x < 3; x++)
+        newInput[x+42] = result[0][x];
+      data.add(newInput);
+      
+    
+ 
+  }
+  return data;
+
+}
 
 /**
  * getWins can be used if you want to pit two of the same engines against 
@@ -121,5 +154,16 @@ public class data {
         // converting each row as string
         // and then printing in a separate line
         System.out.println(Arrays.toString(row));
+    System.out.println();
 }
+public static void print2DDouble(double mat[][]){
+  // Loop through all rows
+  for (double[] row : mat)
+
+      // converting each row as string
+      // and then printing in a separate line
+      System.out.println(Arrays.toString(row));
+  System.out.println();
+}
+
 }
