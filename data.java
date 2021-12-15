@@ -16,14 +16,14 @@ public class data {
    * @throws IOException
    */
   public static void writeData(int games) throws IOException{ 
-    List<int[]> data = cleanDataEndgames(games);
-    FileWriter csvWriter = new FileWriter(new File("Endgames.txt"));
+    List<int[]> data = cleanData(games);
+    FileWriter csvWriter = new FileWriter(new File("Random2.csv"));
     for(int i = 1; i <= 42; i++) {
       csvWriter.append("x" + i + ",");
     }
     csvWriter.append("w,");
     csvWriter.append("l,");
-    csvWriter.append("d,");
+    csvWriter.append("d");
     csvWriter.append("\n");
     for(int[] rowData : data) {   
       StringBuilder s = new StringBuilder();
@@ -34,8 +34,7 @@ public class data {
       csvWriter.append(s);
       csvWriter.append("\n");
     }
-    csvWriter.flush();
-    csvWriter.close();
+ 
   }
 
 /**

@@ -10,6 +10,11 @@ public class Game {
  */
   public static List<int[][]> playGame(){
     Board b = new Board();
+    Model m1 = new Model("ConnectFourNeuralNets\\Alex'sNewModel\\Model1.txt");
+    Model m2 = new Model("ConnectFourNeuralNets\\Alex'sNewModel\\Model2.txt");
+    Model m3 = new Model("ConnectFourNeuralNets\\Alex'sNewModel\\Model3.txt");
+
+
     int player = 1;
     List<int[][]> history = new LinkedList<>();
     boolean gameFinished = false;
@@ -17,9 +22,12 @@ public class Game {
     while(!gameFinished){
       int move = 0;
       if(player == 1)
-        move = Engines.threeInARows(b.getMoves(), b, player); 
+    //    move = Engines.winOrBlock(b.getMoves(), b, player); 
+        move = Engines.pureRandom(b.getMoves()); 
       else
-        move = Engines.threeInARows(b.getMoves(), b, player); 
+        // move = Engines.pureRandom(b.getMoves()); 
+        move = Engines.neuralNetwork(b.getMoves(), b, player, m3); 
+        // move = Engines.threeInARows(b.getMoves(), b, player); 
       int row = b.placeATile(move, player);
       //Copy and add the new board
       int[][] board = b.getBoard();

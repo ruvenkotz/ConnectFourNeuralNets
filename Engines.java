@@ -124,6 +124,36 @@ public class Engines {
     return playerScore;
   }
 
+  public static int neuralNetwork(List<Integer> avaibleMoves, Board b, int player, Model m){
+    int[][] board = b.getBoard();
+    int bestMove = -1;
+    double bestMoveValue = 0;
+
+    for(int i = 0; i < avaibleMoves.size(); i++){
+      int col = avaibleMoves.get(i);
+      int row = b.getRow(col);
+
+      //Reshape the board
+      double[] reshaped = new double[42];
+      int index = 0;
+      for(int x = 0; x < 6; x++){
+        for(int y = 0; y<7;y++){
+          if(x == row && y == col) 
+            reshaped[index] = (double) player;
+          else
+            reshaped[index] = (double) board[x][y];
+          index++;
+        }
+      }
+      double value = m.forward(reshaped)[player-1];
+      if(value > bestMoveValue){
+        bestMove = col;
+        bestMoveValue = value;
+      }
+    }
+    return bestMove;
+  }
+
 
 
 
