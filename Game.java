@@ -1,18 +1,60 @@
 package ConnectFourNeuralNets;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Game {
+    public static List<int[][]> playGameNew(){
+        Board b = new Board();
+        Model m1 = new Model("ConnectFourNeuralNets\\Model3\\random.txt");    
+        int player = 1;
+        List<int[][]> history = new LinkedList<>();
+        boolean gameFinished = false;
+        int movesPlayed = 0;
+        while(!gameFinished){
+          int move = 0;
+          if(player == 1)
+            move = Engines.pureRandom(b.getMoves()); 
+          else
+            move = Engines.pureRandom(b.getMoves()); 
+          int row = b.placeATile(move, player);
+
+          //Copy and add the new board
+          int[][] board = b.getBoard();
+          data.print2D(board);
+          double [] position = Position.getPosition(board, player, row, move);
+          System.out.println(Arrays.toString(position) + "\n");
+          //Check for end of game
+          if(checkForWin(player, row, move, board)){
+             int[][] result = new int[1][3]; 
+             result[0][player-1] = 1;
+             history.add(result);
+             gameFinished = true;
+          }
+          else if(movesPlayed == 41){
+            int[][] result = new int[1][3]; 
+            result[0][2] = 1;
+            history.add(result);
+            gameFinished = true;
+          }
+          movesPlayed++;
+          player = Board.getOpp(player);
+        }
+        // b.resetBoard();
+        return history;
+      }
+
 /**
  * Plays a game and returns the history
  * @return
  */
   public static List<int[][]> playGame(){
     Board b = new Board();
-    Model m1 = new Model("ConnectFourNeuralNets\\Alex'sNewModel\\Model1.txt");
-    Model m2 = new Model("ConnectFourNeuralNets\\Alex'sNewModel\\Model2.txt");
-    Model m3 = new Model("ConnectFourNeuralNets\\Alex'sNewModel\\Model3.txt");
+    Model m1 = new Model("positions.txt");
+    // Model m2 = new Model("ConnectFourNeuralNets\\Alex'sNewModel\\Model2.txt");
+    // Model m3 = new Model("ConnectFourNeuralNets\\Alex'sNewModel\\Model3.txt");
+
 
 
     int player = 1;
@@ -21,12 +63,12 @@ public class Game {
     int movesPlayed = 0;
     while(!gameFinished){
       int move = 0;
-      if(player == 1)
-    //    move = Engines.winOrBlock(b.getMoves(), b, player); 
-        move = Engines.pureRandom(b.getMoves()); 
+      if(player == 2)
+       move = Engines.winOrBlock(b.getMoves(), b, player); 
+        // move = Engines.pureRandom(b.getMoves()); 
       else
         // move = Engines.pureRandom(b.getMoves()); 
-        move = Engines.neuralNetwork(b.getMoves(), b, player, m3); 
+        move = Engines.neuralNetworkNew(b.getMoves(), b, player, m1); 
         // move = Engines.threeInARows(b.getMoves(), b, player); 
       int row = b.placeATile(move, player);
       //Copy and add the new board

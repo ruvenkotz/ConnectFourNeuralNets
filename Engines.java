@@ -154,6 +154,24 @@ public class Engines {
     return bestMove;
   }
 
+  public static int neuralNetworkNew(List<Integer> avaibleMoves, Board b, int player, Model m){
+    int bestMove = -1;
+    double bestMoveValue = 0;
+
+    for(int i = 0; i < avaibleMoves.size(); i++){
+      int[][] board = b.getBoard();
+      int col = avaibleMoves.get(i);
+      int row = b.getRow(col);
+      board[row][col] = player;
+      double value = m.forward(Position.getPosition(board, player, row, col))[player-1];
+      board[row][col] = 0;
+      if(value > bestMoveValue){
+        bestMove = col;
+        bestMoveValue = value;
+      }
+    }
+    return bestMove;
+  }
 
 
 

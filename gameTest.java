@@ -8,7 +8,7 @@ public static void playGame(){
   Model m1 = new Model("rand_model_init.txt");
   Model m2 = new Model("rand_model_2.txt");
   Model m3 = new Model("rand_model_2_new.txt");
-  Model m4 = new Model("endgames2.txt");
+  Model m4 = new Model("positions.txt");
 
   int player = 1;
   boolean gameFinished = false;
@@ -23,7 +23,7 @@ public static void playGame(){
         move = Integer.parseInt(scanner.nextLine())-1;  // Read user input
       }
     else
-      move = Engines.neuralNetwork(b.getMoves(), b, player, m4); 
+      move = Engines.neuralNetworkNew(b.getMoves(), b, player, m4); 
     int row = b.placeATile(move, player);
     //Copy and add the new board
     //Check for end of game
