@@ -5,9 +5,6 @@ import java.util.Scanner;
 public class gameTest{
 public static void playGame(){
   Board b = new Board();
-  Model m1 = new Model("rand_model_init.txt");
-  Model m2 = new Model("rand_model_2.txt");
-  Model m3 = new Model("rand_model_2_new.txt");
   Model m4 = new Model("positions.txt");
 
   int player = 1;

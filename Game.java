@@ -107,6 +107,8 @@ public class Game {
    * @return true if the player won the game
    */
   public static boolean checkForWin(int player, int r, int c, int[][] board){
+    if(r == -1 && c == -1) 
+      return false;
     int depth = 1;
     int row = r;
     int col = c;

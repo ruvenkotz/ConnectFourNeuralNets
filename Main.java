@@ -8,8 +8,13 @@ public class Main {
     // data.getOneGame();
     // data.getWins(10000);
     // Position.FixData();
-    gameTest.playGame();
+    // gameTest.playGame();
 
+    Board b = new Board();
+    Board b1 = new Board(b.getBoard(),b.getMoves(), b.getNextMove());
+    b1.placeATile(4, 1);
+    data.print2D(b.getBoard());
+    data.print2D(b1.getBoard());
     // int[][] board =  {{0,0,0,0,0,0,0},
     //                   {0,0,0,0,0,0,0},
     //                   {0,0,0,0,0,0,0},

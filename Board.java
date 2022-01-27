@@ -31,6 +31,11 @@ public class Board {
       nextMove[i] = 5;
     }
   }
+  public Board(int[][] b, List<Integer> availbleMoves,int[] nextMove) {
+   this.b = b;
+   this.availbleMoves = availbleMoves;
+   this.nextMove = nextMove;
+  }
 
   /**
    * getBoard returns the board
@@ -46,6 +51,13 @@ public class Board {
    */
   public List<Integer> getMoves(){
     return availbleMoves;
+  }
+
+  /**
+   * getMoves returns the availble columns to place pieces into
+   */
+  public int[] getNextMove(){
+    return nextMove;
   }
 
   public int getRow(int col){

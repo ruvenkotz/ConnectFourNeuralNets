@@ -172,6 +172,21 @@ public class Engines {
     }
     return bestMove;
   }
+  // public static int minimax(Board b, int depth, boolean isMaximizingPlayer, 
+  // int alpha, int beta, int player, int row, int col){
+  //   //Check to see if node is a leaf
+  //   if(Game.checkForWin(player, row, col, b.getBoard())){
+  //     if(isMaximizingPlayer)
+  //       return Integer.MAX_VALUE;
+  //     else
+  //       return Integer.MIN_VALUE;
+  //   }
+  //   if (isMaximizingPlayer){
+  //     int[] tup = new int[2];
+  //     tup[1] = Integer.MIN_VALUE;
+
+  //   }
+  // }
 
 
 
